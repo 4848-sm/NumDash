@@ -1,4 +1,4 @@
-// File: C:\Users\jseeker.A1001202242\Desktop\my Portfolio\数字早押しゲーム\src\app\layout.tsx
+// File: C:\Users\jseeker.A1001202242\Desktop\my Portfolio\NumDash\src\app\layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

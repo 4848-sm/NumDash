@@ -1,0 +1,712 @@
+/* リセットとベーススタイル */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+}
+
+/* ピンチズーム禁止（モバイル用） */
+html {
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* PC用のカーソル設定 */
+@media (min-width: 768px) {
+    html {
+        user-select: text;
+    }
+    
+    button {
+        cursor: pointer;
+    }
+    
+    button:disabled {
+        cursor: not-allowed;
+    }
+}
+
+/* 画面の揺れアニメーション */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* バウンスアニメーション */
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate3d(0, 0, 0);
+    }
+    40%, 43% {
+        transform: translate3d(0, -30px, 0);
+    }
+    70% {
+        transform: translate3d(0, -15px, 0);
+    }
+    90% {
+        transform: translate3d(0, -4px, 0);
+    }
+}
+
+.bounce {
+    animation: bounce 1s infinite;
+}
+
+/* 共通スタイル */
+.screen {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+}
+
+/* 絵文字装飾 */
+.emoji-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.emoji {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+    opacity: 0.7;
+    z-index: 0;
+}
+
+@media (min-width: 768px) {
+    .emoji {
+        font-size: 2rem;
+        opacity: 0.8;
+    }
+}
+
+.emoji-1 { top: 5%; left: 5%; animation-delay: 0s; }
+.emoji-2 { top: 8%; right: 8%; animation-delay: 0.5s; }
+.emoji-3 { top: 15%; left: 3%; animation-delay: 1s; }
+.emoji-4 { top: 25%; right: 5%; animation-delay: 1.5s; }
+.emoji-5 { bottom: 25%; left: 2%; animation-delay: 2s; }
+.emoji-6 { bottom: 15%; right: 3%; animation-delay: 2.5s; }
+.emoji-7 { bottom: 8%; left: 8%; animation-delay: 3s; }
+.emoji-8 { bottom: 5%; right: 12%; animation-delay: 3.5s; }
+.emoji-9 { top: 35%; right: 2%; animation-delay: 4s; }
+.emoji-10 { bottom: 35%; left: 5%; animation-delay: 4.5s; }
+
+/* メニュー画面 */
+#menu-screen {
+    background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #e0e7ff 100%);
+}
+
+.main-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #7c3aed;
+    text-align: center;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    .main-title {
+        font-size: 4rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .main-title {
+        font-size: 5rem;
+    }
+}
+
+.subtitle {
+    color: #a855f7;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+/* スコア表示（削除済み） */
+
+/* ゲームモード選択 */
+.game-modes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .game-modes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .game-modes-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.mode-btn {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e9d5ff;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.mode-btn:hover {
+    box-shadow: 0 25px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+    border-color: #f9a8d4;
+}
+
+.mode-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #6b21a8;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s;
+}
+
+.mode-btn:hover .mode-title {
+    color: #db2777;
+}
+
+.mode-desc {
+    color: #a855f7;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.mode-best {
+    font-size: 0.75rem;
+    color: #059669;
+    font-weight: bold;
+}
+
+/* PC操作説明 */
+.pc-controls {
+    margin-top: 2rem;
+    text-align: center;
+    color: #7c3aed;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    max-width: 32rem;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #e9d5ff;
+}
+
+.pc-controls h3 {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.pc-controls p {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+@media (max-width: 767px) {
+    .pc-controls {
+        display: none;
+    }
+}
+
+/* 難易度選択画面 */
+#difficulty-screen {
+    background: linear-gradient(135deg, #cffafe 0%, #dbeafe 50%, #e0e7ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.difficulty-container {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 25px 25px -5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 32rem;
+    width: 100%;
+    border: 2px solid #e9d5ff;
+    position: relative;
+    z-index: 10;
+}
+
+.difficulty-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6b21a8;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .difficulty-title {
+        font-size: 2.5rem;
+    }
+}
+
+.difficulty-subtitle {
+    color: #7c3aed;
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+.difficulty-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.difficulty-btn {
+    width: 100%;
+    font-weight: bold;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    border: none;
+    transition: all 0.2s;
+    font-size: 1.25rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.easy-btn {
+    background: linear-gradient(to right, #4ade80, #60a5fa);
+    color: white;
+}
+
+.easy-btn:hover {
+    background: linear-gradient(to right, #22c55e, #3b82f6);
+}
+
+.hard-btn {
+    background: linear-gradient(to right, #a78bfa, #f472b6);
+    color: white;
+}
+
+.hard-btn:hover {
+    background: linear-gradient(to right, #8b5cf6, #ec4899);
+}
+
+.difficulty-desc {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    opacity: 0.9;
+}
+
+.back-btn {
+    margin-top: 1.5rem;
+    background: #9ca3af;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.75rem;
+    border: none;
+    transition: all 0.2s;
+}
+
+.back-btn:hover {
+    background: #6b7280;
+}
+
+/* ゲームプレイ画面 */
+#game-screen {
+    background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 50%, #fce7f3 100%);
+    transition: all 0.3s;
+}
+
+#game-screen.error-bg {
+    background: #fecaca;
+}
+
+.game-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.8);
+    color: #6b21a8;
+    padding: 1rem;
+    border-bottom: 2px solid #e9d5ff;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-btn {
+    background: #e9d5ff;
+    color: #6b21a8;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    border: none;
+    transition: all 0.2s;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+    .menu-btn {
+        font-size: 1rem;
+    }
+}
+
+.menu-btn:hover {
+    background: #ddd6fe;
+}
+
+.game-info {
+    text-align: center;
+}
+
+.game-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .game-title {
+        font-size: 1.25rem;
+    }
+}
+
+.progress {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+    .progress {
+        font-size: 1rem;
+    }
+}
+
+.timer-info {
+    text-align: right;
+}
+
+.timer {
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .timer {
+        font-size: 1.25rem;
+    }
+}
+
+.next-number {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+    .next-number {
+        font-size: 1rem;
+    }
+}
+
+.pc-game-controls {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    background: #f3e8ff;
+    border-radius: 0.5rem;
+    padding: 0.25rem 1rem;
+    max-width: 24rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 500;
+    color: #7c3aed;
+}
+
+@media (max-width: 767px) {
+    .pc-game-controls {
+        display: none;
+    }
+}
+
+.header-emoji {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.game-area {
+    position: absolute;
+    inset: 0;
+    padding-top: 8rem;
+    padding-bottom: 1rem;
+}
+
+/* 数字ボタン */
+.number-btn {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    font-weight: bold;
+    transition: all 0.2s;
+    user-select: none;
+    border: 2px solid #e9d5ff;
+    background: white;
+    color: #6b21a8;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.number-btn:not(:disabled):hover {
+    background: #fdf2f8;
+    border-color: #f9a8d4;
+    box-shadow: 0 25px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.number-btn:disabled {
+    background: #e5e7eb;
+    color: #9ca3af;
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #d1d5db;
+}
+
+/* 3x3モード */
+.number-btn.size-3x3 {
+    width: 5rem;
+    height: 5rem;
+    font-size: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .number-btn.size-3x3 {
+        width: 6rem;
+        height: 6rem;
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .number-btn.size-3x3 {
+        width: 7rem;
+        height: 7rem;
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .number-btn.size-3x3 {
+        width: 8rem;
+        height: 8rem;
+        font-size: 3rem;
+    }
+}
+
+/* 4x4モード */
+.number-btn.size-4x4 {
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.125rem;
+}
+
+@media (min-width: 768px) {
+    .number-btn.size-4x4 {
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .number-btn.size-4x4 {
+        width: 5rem;
+        height: 5rem;
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .number-btn.size-4x4 {
+        width: 6rem;
+        height: 6rem;
+        font-size: 1.875rem;
+    }
+}
+
+/* ゲーム完了画面 */
+#finish-screen {
+    background: linear-gradient(135deg, #fef3c7 0%, #d9f99d 50%, #dbeafe 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.finish-container {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 25px 25px -5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 32rem;
+    width: 100%;
+    border: 2px solid #d9f99d;
+}
+
+.finish-emoji {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.finish-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #059669;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .finish-title {
+        font-size: 2.5rem;
+    }
+}
+
+.new-record {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #dc2626;
+    margin-bottom: 0.5rem;
+    animation: bounce 1s infinite;
+}
+
+.final-time {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #059669;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .final-time {
+        font-size: 5rem;
+    }
+}
+
+.finish-emoji-2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.finish-mode {
+    color: #059669;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.best-score {
+    font-size: 0.875rem;
+    color: #7c3aed;
+    margin-bottom: 1rem;
+}
+
+.finish-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.finish-btn {
+    width: 100%;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    border: none;
+    transition: all 0.2s;
+    font-size: 1.125rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.play-again-btn {
+    background: linear-gradient(to right, #60a5fa, #a78bfa);
+    color: white;
+}
+
+.play-again-btn:hover {
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+}
+
+.finish-btn.menu-btn {
+    background: linear-gradient(to right, #a78bfa, #f472b6);
+    color: white;
+}
+
+.finish-btn.menu-btn:hover {
+    background: linear-gradient(to right, #8b5cf6, #ec4899);
+}
+
+.pc-finish-controls {
+    font-size: 0.875rem;
+    color: #a855f7;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+@media (max-width: 767px) {
+    .pc-finish-controls {
+        display: none;
+    }
+}
+
+.finish-emoji-3 {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+}
+
+/* フォーカス時のアウトライン */
+@media (min-width: 768px) {
+    button:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+    }
+}

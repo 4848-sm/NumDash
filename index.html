@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字早押しゲーム</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- メニュー画面 -->
+        <div id="menu-screen" class="screen">
+            <!-- 散りばめられた絵文字 -->
+            <div class="emoji-decoration">
+                <div class="emoji emoji-1">🍭</div>
+                <div class="emoji emoji-2">🍩</div>
+                <div class="emoji emoji-3">🍓</div>
+                <div class="emoji emoji-4">🍪</div>
+                <div class="emoji emoji-5">🌷</div>
+                <div class="emoji emoji-6">🍀</div>
+                <div class="emoji emoji-7">🐰</div>
+                <div class="emoji emoji-8">🐿️</div>
+                <div class="emoji emoji-9">🦋</div>
+                <div class="emoji emoji-10">🐬</div>
+            </div>
+
+            <div class="container">
+                <h1 class="main-title">数字早押しゲーム</h1>
+                <p class="subtitle">クリックして数字を順番に押そう！</p>
+                
+
+
+                <!-- ゲームモード選択 -->
+                <div id="game-modes" class="game-modes-grid"></div>
+
+                <!-- PC操作説明 -->
+                <div id="pc-controls" class="pc-controls">
+                    <h3>PC操作方法</h3>
+                    <p>マウスクリックで数字を選択<br/>Escキーでメニューに戻る</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 難易度選択画面 -->
+        <div id="difficulty-screen" class="screen hidden">
+            <div class="emoji-decoration">
+                <div class="emoji emoji-1">🍭</div>
+                <div class="emoji emoji-2">🍩</div>
+                <div class="emoji emoji-3">🌷</div>
+                <div class="emoji emoji-4">🍀</div>
+            </div>
+
+            <div class="difficulty-container">
+                <h2 id="difficulty-mode-name" class="difficulty-title"></h2>
+                <p class="difficulty-subtitle">難易度を選択してください</p>
+                
+                <div class="difficulty-buttons">
+                    <button id="easy-btn" class="difficulty-btn easy-btn">
+                        🍓 3×3マス（簡単）🍪
+                        <div class="difficulty-desc">9個の数字</div>
+                    </button>
+                    
+                    <button id="hard-btn" class="difficulty-btn hard-btn">
+                        🌷 4×4マス（難しい）🍀
+                        <div class="difficulty-desc">16個の数字</div>
+                    </button>
+                </div>
+                
+                <button id="back-to-menu-btn" class="back-btn">🐰 戻る 🐿️</button>
+            </div>
+        </div>
+
+        <!-- ゲームプレイ画面 -->
+        <div id="game-screen" class="screen hidden">
+            <!-- ヘッダー -->
+            <div class="game-header">
+                <div class="header-content">
+                    <button id="menu-btn" class="menu-btn">🏠 🌷 メニュー</button>
+                    <div class="game-info">
+                        <h2 id="game-mode-title" class="game-title">🍭 ゲーム 🍩</h2>
+                        <div id="progress" class="progress">🍓 1 / 9 🍪</div>
+                    </div>
+                    <div class="timer-info">
+                        <div id="timer" class="timer">⏱️ 0.00秒</div>
+                        <div id="next-number" class="next-number">🎯 次: 1</div>
+                    </div>
+                </div>
+                <div id="pc-game-controls" class="pc-game-controls">
+                    🐰 マウスクリック、Escキーが使えます 🐿️
+                </div>
+                <div class="header-emoji">🍀 🌷 🦋 🐬</div>
+            </div>
+
+            <!-- 数字ボタンエリア -->
+            <div id="game-area" class="game-area"></div>
+        </div>
+
+        <!-- ゲーム完了画面 -->
+        <div id="finish-screen" class="screen hidden">
+            <div class="finish-container">
+                <div class="finish-emoji">🎉 🍭 🎉</div>
+                <h2 class="finish-title">ゲーム完了！</h2>
+                <div id="new-record" class="new-record hidden">🏆 🌟 新記録！ 🌟 🏆</div>
+                <div id="final-time" class="final-time">0.00秒</div>
+                <div class="finish-emoji-2">🍓 🍪 🍩</div>
+                <p id="finish-mode" class="finish-mode">ゲームをクリアしました！</p>
+                <p id="best-score-display" class="best-score hidden"></p>
+                
+                <div class="finish-buttons">
+                    <button id="play-again-btn" class="finish-btn play-again-btn">
+                        🔄 🐰 もう一度プレイ 🐿️
+                    </button>
+                    <button id="finish-menu-btn" class="finish-btn menu-btn">
+                        🏠 🌷 メニューに戻る 🍀
+                    </button>
+                </div>
+                
+                <p id="pc-finish-controls" class="pc-finish-controls">
+                    🦋 Escキーでメニューに戻ることもできます 🐬
+                </p>
+                <div class="finish-emoji-3">🍀 🌷 🍓 🍭</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
