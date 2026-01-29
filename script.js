@@ -146,8 +146,9 @@ function setupEventListeners() {
 
 // キーボード操作
 function handleKeyPress(event) {
+    const key = event.key;
+    
     if (gameState === 'playing' && !isMobile) {
-        const key = event.key;
         if (key >= '0' && key <= '9') {
             const number = parseInt(key);
             handleNumberClick(number);
